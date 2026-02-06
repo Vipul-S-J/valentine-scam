@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>⚠️ Scam Alert</title>
+  <title>❤️ Thank You ❤️</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -16,56 +15,25 @@
     }
 
     .card {
-      background: #1e1e1e;
-      border-radius: 12px;
+      background: white;
       padding: 30px;
+      border-radius: 16px;
       text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       width: 350px;
-      box-shadow: 0 0 20px rgba(255,0,100,0.4);
-    }
-
-    .warning {
-      color: #ff4d4d;
-      font-weight: bold;
-      margin-bottom: 10px;
     }
 
     h1 {
-      font-size: 22px;
+      color: #ff4d6d;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 18px;
       margin-bottom: 20px;
     }
 
-    .buttons {
-      position: relative;
-      height: 80px;
-    }
-
-    button {
-      padding: 10px 22px;
-      font-size: 16px;
-      border-radius: 20px;
-      border: none;
-      cursor: pointer;
-    }
-
-    #yes {
-      background: #ff4da6;
-      color: white;
-    }
-
-    #no {
-      background: #555;
-      color: white;
-      position: absolute;
-      left: 180px;
-    }
-
-    .celebrate {
-      display: none;
-      margin-top: 20px;
-    }
-
-    .celebrate img {
+    img {
       width: 220px;
       border-radius: 12px;
     }
@@ -73,41 +41,14 @@
 </head>
 <body>
 
-  <div class="card" id="card">
-    <div class="warning">⚠️ Scam Link Detected</div>
-    <p>This link may steal your heart 💔</p>
+  <div class="card">
+    <h1>Thank you ❤️</h1>
+    <p>Love you 😘🌹</p>
 
-    <h1>Will you be my Valentine ❤️?</h1>
-
-    <div class="buttons">
-      <button id="yes">Yes 💖</button>
-      <button id="no">No 🙃</button>
-    </div>
-
-    <div class="celebrate" id="celebrate">
-      <h2>YAYYY!!! 🎉🐱</h2>
-      <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Dancing Cat">
-    </div>
+    <img 
+      src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" 
+      alt="Cat holding flowers">
   </div>
-
-  <script>
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const celebrate = document.getElementById("celebrate");
-
-    noBtn.addEventListener("mouseover", () => {
-      const x = Math.random() * 200;
-      const y = Math.random() * 50;
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-    });
-
-    yesBtn.addEventListener("click", () => {
-      celebrate.style.display = "block";
-      yesBtn.disabled = true;
-      noBtn.style.display = "none";
-    });
-  </script>
 
 </body>
 </html>
