@@ -56,4 +56,41 @@
     #no {
       background: #666;
       color: white;
-      pos
+      position: absolute;
+      left: 160px;
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="warning">⚠️ Scam Link Detected</div>
+    <p>This link may steal your heart 💔</p>
+
+    <h1>Will you be my Valentine ❤️?</h1>
+
+    <div class="buttons">
+      <button id="yes" onclick="goYes()">Yes 💖</button>
+      <button id="no">No 🙃</button>
+    </div>
+  </div>
+
+  <script>
+    function goYes() {
+      window.location.href = "thanks.html";
+    }
+
+    const noBtn = document.getElementById("no");
+
+    function moveNo() {
+      noBtn.style.left = Math.random() * 200 + "px";
+      noBtn.style.top = Math.random() * 50 + "px";
+    }
+
+    noBtn.addEventListener("mouseover", moveNo);
+    noBtn.addEventListener("touchstart", moveNo);
+  </script>
+
+</body>
+</html>
