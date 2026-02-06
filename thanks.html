@@ -3,30 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <title>YAYYY ❤️</title>
+
   <style>
     body {
+      margin: 0;
+      height: 100vh;
       font-family: Arial, sans-serif;
       background: radial-gradient(circle, #ff8ccf, #ff4da6);
-      color: white;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
+      overflow: hidden;
+      color: white;
     }
 
     .card {
-      background: rgba(0,0,0,0.25);
-      border-radius: 18px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 20px;
       padding: 30px;
       text-align: center;
       width: 420px;
+      z-index: 2;
       box-shadow: 0 0 30px rgba(255,255,255,0.4);
     }
 
     h1 {
       font-size: 30px;
-      margin-bottom: 5px;
+      margin: 5px 0;
     }
 
     h2 {
@@ -36,38 +39,55 @@
     .main-gif {
       width: 260px;
       border-radius: 14px;
-      margin: 15px 0;
+      margin-top: 10px;
     }
 
-    .celebrate-gif {
-      width: 130px;
-      margin: 6px;
+    /* 🎉 CONFETTI / CRACKERS */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: red;
+      animation: fall 3s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg);
+      }
+      100% {
+        transform: translateY(110vh) rotate(720deg);
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- 🎊 Celebration crackers -->
+  <script>
+    for (let i = 0; i < 80; i++) {
+      const confetti = document.createElement("div");
+      confetti.className = "confetti";
+      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.backgroundColor =
+        ["#ff4da6", "#ffd700", "#00e5ff", "#ffffff"][Math.floor(Math.random() * 4)];
+      confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
+      confetti.style.width = confetti.style.height = (Math.random() * 8 + 6) + "px";
+      document.body.appendChild(confetti);
+    }
+  </script>
+
+  <!-- ❤️ Main content -->
   <div class="card">
-
-    <img
-      class="celebrate-gif"
-      src="https://media.tenor.com/8Zk4Y2kH6bEAAAAC/confetti-celebration.gif"
-      alt="Confetti">
-
     <h1>Love you 💖</h1>
     <h2>YAYYYY!!! 🎉😻</h2>
 
-    <!-- LOCAL GIF (FIXED PATH) -->
+    <!-- YOUR LOCAL GIF -->
     <img
       class="main-gif"
       src="./this-is-for-you-cat-flower.gif"
       alt="Cat holding flowers">
-
-    <img
-      class="celebrate-gif"
-      src="https://media.tenor.com/I6kN-6X7nhAAAAAC/hearts-love.gif"
-      alt="Hearts">
-
   </div>
 
 </body>
