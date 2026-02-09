@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Love You 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     html, body {
@@ -17,6 +18,21 @@
       background-size: cover;
       background-position: center;
       background-repeat: repeat;
+      animation: bgPulse 6s ease-in-out infinite;
+    }
+
+    @keyframes bgPulse {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.08); }
+    }
+
+    /* 🌙 Vignette */
+    .vignette {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.65) 100%);
+      z-index: 2;
+      pointer-events: none;
     }
 
     /* ✨ Sparkles */
@@ -29,7 +45,7 @@
       background-size: 90px 90px;
       animation: sparkleMove 12s linear infinite;
       z-index: 1;
-      opacity: 0.7;
+      opacity: 0.6;
     }
 
     @keyframes sparkleMove {
@@ -44,15 +60,17 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      text-align: center;
+      padding: 16px;
     }
 
     .card {
       background: rgba(0, 0, 0, 0.9);
-      padding: 36px;
+      padding: 28px;
       border-radius: 26px;
       box-shadow: 0 0 60px rgba(255, 105, 180, 1);
       max-width: 420px;
+      width: 100%;
+      text-align: center;
       animation: heartbeat 2.8s infinite;
     }
 
@@ -67,23 +85,22 @@
     h1 {
       color: #ff5fa2;
       margin-bottom: 10px;
-      font-size: 30px;
+      font-size: clamp(24px, 6vw, 30px);
     }
 
     #typeText {
       color: #ffd1e8;
       min-height: 48px;
       margin-bottom: 14px;
-      font-size: 17px;
+      font-size: clamp(15px, 4.2vw, 17px);
       line-height: 1.5;
     }
 
-    /* 💖 Hidden love line */
     #hiddenLove {
       opacity: 0;
       margin-top: 10px;
       color: #ffc1dc;
-      font-size: 16px;
+      font-size: clamp(14px, 4vw, 16px);
       animation: fadeIn 3s ease forwards;
       animation-delay: 4.5s;
     }
@@ -92,10 +109,9 @@
       to { opacity: 1; }
     }
 
-    /* 🌟 Name glow */
     .name {
       margin-top: 12px;
-      font-size: 20px;
+      font-size: clamp(17px, 4.5vw, 20px);
       color: #fff;
       text-shadow: 0 0 12px #ff5fa2, 0 0 25px #ff8fc7;
       opacity: 0;
@@ -104,18 +120,20 @@
     }
 
     img {
-      width: 260px;
+      width: 100%;
+      max-width: 260px;
       margin-top: 18px;
       border-radius: 18px;
       box-shadow: 0 0 25px rgba(255,105,180,0.8);
     }
 
-    /* 💥 Heart fireworks */
+    /* 💥 Click hearts */
     .heart {
       position: fixed;
       font-size: 22px;
       animation: burst 1.4s ease-out forwards;
       pointer-events: none;
+      z-index: 5;
     }
 
     @keyframes burst {
@@ -125,16 +143,33 @@
         opacity: 0;
       }
     }
+
+    /* 💗 Floating hearts */
+    .floating-heart {
+      position: fixed;
+      bottom: -40px;
+      font-size: 20px;
+      opacity: 0.35;
+      animation: floatUp linear infinite;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0) scale(0.8); opacity: 0.4; }
+      to { transform: translateY(-120vh) scale(1.2); opacity: 0; }
+    }
   </style>
 </head>
 
 <body>
-  <!-- 🎵 Soft background music -->
+  <!-- 🎵 Background music -->
   <audio autoplay loop volume="0.25">
     <source src="love.mp3" type="audio/mpeg">
   </audio>
 
   <div class="sparkles"></div>
+  <div class="vignette"></div>
 
   <div class="content">
     <div class="card">
@@ -146,7 +181,6 @@
         You didn’t just click “yes”… you chose a lifetime of us 💞
       </div>
 
-      <!-- 🌟 Optional name reveal -->
       <div class="name">Love you, Swathi 💖</div>
 
       <img src="cute.gif" alt="Cute Valentine Cat">
@@ -155,22 +189,20 @@
 
   <script>
     /* ✨ Typewriter */
-    const text =
-      "You chose love… and I promise to choose you every single day 💖";
+    const text = "You chose love… and I promise to choose you every single day 💖";
     let i = 0;
-    const speed = 45;
     const target = document.getElementById("typeText");
 
     function typeWriter() {
       if (i < text.length) {
         target.innerHTML += text.charAt(i);
         i++;
-        setTimeout(typeWriter, speed);
+        setTimeout(typeWriter, 45);
       }
     }
     typeWriter();
 
-    /* 💥 Heart fireworks */
+    /* 💥 Click hearts */
     document.addEventListener("click", (e) => {
       for (let i = 0; i < 6; i++) {
         const heart = document.createElement("div");
@@ -181,10 +213,20 @@
         heart.style.setProperty("--x", `${(Math.random() - 0.5) * 200}px`);
         heart.style.setProperty("--y", `${(Math.random() - 0.5) * 200}px`);
         document.body.appendChild(heart);
-
         setTimeout(() => heart.remove(), 1400);
       }
     });
+
+    /* 💗 Floating hearts */
+    setInterval(() => {
+      const h = document.createElement("div");
+      h.className = "floating-heart";
+      h.innerHTML = "💗";
+      h.style.left = Math.random() * 100 + "vw";
+      h.style.animationDuration = 8 + Math.random() * 6 + "s";
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 12000);
+    }, 900);
   </script>
 </body>
 </html>
