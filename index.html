@@ -9,39 +9,36 @@
       height: 100%;
       margin: 0;
       font-family: Arial, sans-serif;
-      overflow: hidden;
     }
 
-    /* 💖 Heart background */
+    /* Fullscreen background image */
     body {
-      background-color: #ffd6e8;
-      background-image: url("heart.png");
-      background-repeat: repeat;
-      background-size: 80px 80px; /* small bubble hearts */
-      animation: floatBg 30s linear infinite;
-    }
-
-    @keyframes floatBg {
-      from { background-position: 0 0; }
-      to { background-position: 0 -800px; }
-    }
-
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.45);
+      background-image: url("tim-mossholder-UrrIRRX4ff8-unsplash.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
+    /* Dark overlay for readability */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+    }
+
     .card {
+      position: relative;
       background: rgba(30, 30, 30, 0.95);
       border-radius: 16px;
       padding: 30px;
       text-align: center;
       width: 360px;
       box-shadow: 0 0 30px rgba(255, 0, 120, 0.6);
+      color: #fff;
+      z-index: 2;
     }
 
     .warning {
@@ -57,7 +54,6 @@
     h1 {
       font-size: 22px;
       margin-bottom: 20px;
-      color: #fff;
     }
 
     .buttons {
@@ -89,17 +85,17 @@
 </head>
 
 <body>
-  <div class="overlay">
-    <div class="card">
-      <div class="warning">⚠️ Scam Link Detected</div>
-      <p>This link may steal your heart 💔</p>
+  <div class="overlay"></div>
 
-      <h1>Will you be my Valentine ❤️?</h1>
+  <div class="card">
+    <div class="warning">⚠️ Scam Link Detected</div>
+    <p>This link may steal your heart 💔</p>
 
-      <div class="buttons">
-        <button id="yes">Yes 💖</button>
-        <button id="no">No 🙃</button>
-      </div>
+    <h1>Will you be my Valentine ❤️?</h1>
+
+    <div class="buttons">
+      <button id="yes">Yes 💖</button>
+      <button id="no">No 🙃</button>
     </div>
   </div>
 
