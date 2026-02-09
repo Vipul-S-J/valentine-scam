@@ -10,38 +10,27 @@
       margin: 0;
       font-family: Arial, sans-serif;
       overflow: hidden;
-      background: linear-gradient(135deg, #ffb6d5, #ffe6f2);
     }
 
-    /* Floating hearts background */
-    body::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,0.9) 2px, transparent 3px),
-        radial-gradient(circle, rgba(255,105,180,0.9) 3px, transparent 4px),
-        radial-gradient(circle, rgba(255,182,193,0.8) 2px, transparent 3px);
-      background-size: 120px 120px;
-      animation: floatHearts 25s linear infinite;
-      z-index: 1;
+    /* 💗 Heart GIF background */
+    body {
+      background-image: url("heart.gif");
+      background-size: cover;
+      background-position: center;
+      background-repeat: repeat;
     }
 
-    @keyframes floatHearts {
-      from { background-position: 0 0; }
-      to { background-position: 0 -1200px; }
-    }
-
-    /* Sparkles */
+    /* Sparkles overlay */
     .sparkles {
       position: absolute;
       inset: 0;
       background-image:
-        radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 2px);
-      background-size: 80px 80px;
+        radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 2px),
+        radial-gradient(circle, rgba(255,182,193,0.9) 1px, transparent 2px);
+      background-size: 90px 90px;
       animation: sparkleMove 12s linear infinite;
-      z-index: 2;
-      opacity: 0.6;
+      z-index: 1;
+      opacity: 0.7;
     }
 
     @keyframes sparkleMove {
@@ -49,54 +38,54 @@
       to { background-position: 600px -600px; }
     }
 
-    /* Content card */
+    /* Center content */
     .content {
       position: relative;
-      z-index: 3;
+      z-index: 2;
       height: 100%;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 30px;
-      border-radius: 22px;
-      box-shadow: 0 0 40px rgba(255, 105, 180, 0.7);
+      background: rgba(255, 255, 255, 0.92);
+      padding: 32px;
+      border-radius: 24px;
+      box-shadow: 0 0 45px rgba(255, 105, 180, 0.9);
       max-width: 380px;
     }
 
     h1 {
       color: #ff2f92;
       margin-bottom: 10px;
+      font-size: 28px;
     }
 
     h2 {
       color: #ff5fa2;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     img {
       width: 260px;
-      border-radius: 16px;
+      border-radius: 18px;
     }
   </style>
 </head>
 
 <body>
-  <!-- sparkles layer -->
+  <!-- Sparkles layer -->
   <div class="sparkles"></div>
 
-  <!-- content -->
+  <!-- Main content -->
   <div class="content">
     <div class="card">
       <h1>YAYYYY!!! 🎉💖</h1>
       <h2>Love youuu 🥰</h2>
 
-      <!-- Your uploaded gif -->
+      <!-- Your cat flower gif -->
       <img src="this-is-for-you-cat-flower.gif" alt="Cat holding flowers">
     </div>
   </div>
