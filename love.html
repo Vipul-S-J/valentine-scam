@@ -23,6 +23,13 @@
       text-align: center;
       max-width: 380px;
       box-shadow: 0 0 40px rgba(255, 105, 180, 0.85);
+      animation: pulse 3s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 40px rgba(255,105,180,0.7); }
+      50% { box-shadow: 0 0 55px rgba(255,105,180,1); }
+      100% { box-shadow: 0 0 40px rgba(255,105,180,0.7); }
     }
 
     h1 {
@@ -34,6 +41,13 @@
       color: #ffd1e8;
       font-size: 16px;
       line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .pause {
+      font-style: italic;
+      font-size: 14px;
+      opacity: 0.85;
       margin-bottom: 26px;
     }
 
@@ -56,13 +70,18 @@
 <body>
   <div class="card">
     <h1>Are you sure?</h1>
+
     <p>
       Think again 😉 This choice comes with the best kind of love—endless care,
       warm moments, and someone who’ll choose you every single day.
     </p>
 
-    <!-- goes to your FINAL celebration page (unchanged) -->
-    <a href="thanks.html">Yes, I’m sure 💖</a>
+    <p class="pause">
+      Some decisions are quiet… but they echo for a lifetime ✨
+    </p>
+
+    <!-- Goes to final celebration page -->
+    <a href="thanks.html">Yes, I choose this love 💖</a>
   </div>
 </body>
 </html>
