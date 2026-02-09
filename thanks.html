@@ -13,48 +13,56 @@
       overflow: hidden;
     }
 
-    /* 🌑 Dark romantic background */
+    /* 🌑 Dark romance background */
     body {
       background:
-        radial-gradient(circle at top, rgba(255,105,180,0.18), transparent 60%),
-        linear-gradient(180deg, #14000c, #000);
+        radial-gradient(circle at top, rgba(255,60,140,0.18), transparent 60%),
+        linear-gradient(180deg, #0a0005, #000);
     }
 
-    /* ✨ Sparkles */
-    .sparkles {
+    /* 🌫️ Fog */
+    .fog {
       position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 2px),
-        radial-gradient(circle, rgba(255,182,193,0.9) 1px, transparent 2px);
-      background-size: 90px 90px;
-      animation: sparkleMove 12s linear infinite;
-      z-index: 1;
-      opacity: 0.6;
-      pointer-events: none;
-    }
-
-    @keyframes sparkleMove {
-      from { background-position: 0 0; }
-      to { background-position: 600px -600px; }
-    }
-
-    /* 💕 Romantic glow */
-    .glow {
-      position: fixed;
-      inset: 0;
+      inset: -20%;
       background:
-        radial-gradient(circle at 25% 30%, rgba(255,105,180,0.18), transparent 40%),
-        radial-gradient(circle at 75% 65%, rgba(255,182,193,0.14), transparent 45%);
-      z-index: 2;
+        radial-gradient(circle, rgba(255,105,180,0.08), transparent 60%);
+      animation: fogMove 40s linear infinite;
+      z-index: 1;
       pointer-events: none;
+    }
+
+    @keyframes fogMove {
+      from { transform: translateX(-10%); }
+      to { transform: translateX(10%); }
+    }
+
+    /* ❤️ Falling hearts + 🌹 petals */
+    .romance-fall span {
+      position: fixed;
+      top: -10vh;
+      font-size: 18px;
+      opacity: 0.4;
+      animation: fall linear infinite;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    @keyframes fall {
+      from {
+        transform: translateY(-10vh) rotate(0deg) scale(0.8);
+        opacity: 0.5;
+      }
+      to {
+        transform: translateY(120vh) rotate(360deg) scale(1.2);
+        opacity: 0;
+      }
     }
 
     /* 🌙 Vignette */
     .vignette {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.7) 100%);
+      background: radial-gradient(circle, transparent 55%, rgba(0,0,0,0.85) 100%);
       z-index: 3;
       pointer-events: none;
     }
@@ -71,10 +79,10 @@
     }
 
     .card {
-      background: rgba(0, 0, 0, 0.9);
-      padding: 30px;
-      border-radius: 26px;
-      box-shadow: 0 0 65px rgba(255, 105, 180, 1);
+      background: rgba(0,0,0,0.93);
+      padding: 32px;
+      border-radius: 28px;
+      box-shadow: 0 0 80px rgba(255,60,140,1);
       max-width: 420px;
       width: 100%;
       animation: heartbeat 2.8s infinite;
@@ -82,47 +90,49 @@
 
     @keyframes heartbeat {
       0% { transform: scale(1); }
-      25% { transform: scale(1.03); }
+      25% { transform: scale(1.04); }
       40% { transform: scale(1); }
-      60% { transform: scale(1.04); }
+      60% { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
 
     h1 {
       color: #ff5fa2;
-      font-size: clamp(24px, 6vw, 30px);
+      font-size: clamp(24px, 6vw, 32px);
       margin-bottom: 10px;
     }
 
     #typeText {
       color: #ffd1e8;
-      min-height: 48px;
+      min-height: 52px;
       font-size: clamp(15px, 4.2vw, 17px);
-      line-height: 1.5;
-      margin-bottom: 14px;
+      line-height: 1.6;
     }
 
     #hiddenLove {
       opacity: 0;
-      margin-top: 10px;
+      margin-top: 14px;
       color: #ffc1dc;
-      font-size: clamp(14px, 4vw, 16px);
       animation: fadeIn 3s ease forwards;
       animation-delay: 4.5s;
     }
 
-    @keyframes fadeIn {
-      to { opacity: 1; }
+    .name {
+      margin-top: 16px;
+      font-size: clamp(18px, 4.8vw, 22px);
+      color: #fff;
+      text-shadow: 0 0 15px #ff5fa2, 0 0 35px #ff8fc7;
+      opacity: 0;
+      transform: scale(0.9);
+      animation: nameReveal 3s ease forwards;
+      animation-delay: 6.5s;
     }
 
-    .name {
-      margin-top: 12px;
-      font-size: clamp(17px, 4.5vw, 20px);
-      color: #fff;
-      text-shadow: 0 0 12px #ff5fa2, 0 0 25px #ff8fc7;
-      opacity: 0;
-      animation: fadeIn 3s ease forwards;
-      animation-delay: 6.5s;
+    @keyframes nameReveal {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     img {
@@ -130,7 +140,7 @@
       max-width: 260px;
       margin-top: 18px;
       border-radius: 18px;
-      box-shadow: 0 0 25px rgba(255,105,180,0.8);
+      box-shadow: 0 0 35px rgba(255,105,180,0.9);
     }
 
     /* 💥 Click hearts */
@@ -145,37 +155,22 @@
     @keyframes burst {
       0% { transform: scale(0); opacity: 1; }
       100% {
-        transform: translate(var(--x), var(--y)) scale(1.5);
+        transform: translate(var(--x), var(--y)) scale(1.6);
         opacity: 0;
       }
-    }
-
-    /* 💗 Floating hearts */
-    .floating-heart {
-      position: fixed;
-      bottom: -40px;
-      font-size: 20px;
-      opacity: 0.35;
-      animation: floatUp linear infinite;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    @keyframes floatUp {
-      from { transform: translateY(0) scale(0.8); opacity: 0.4; }
-      to { transform: translateY(-120vh) scale(1.2); opacity: 0; }
     }
   </style>
 </head>
 
 <body>
-  <!-- 🎵 Background music -->
-  <audio autoplay loop volume="0.25">
-    <source src="love.mp3" type="audio/mpeg">
+
+  <!-- 💓 Heartbeat -->
+  <audio autoplay loop volume="0.18">
+    <source src="heartbeat.mp3" type="audio/mpeg">
   </audio>
 
-  <div class="sparkles"></div>
-  <div class="glow"></div>
+  <div class="fog"></div>
+  <div class="romance-fall" id="fall"></div>
   <div class="vignette"></div>
 
   <div class="content">
@@ -217,23 +212,26 @@
         heart.innerHTML = "💖";
         heart.style.left = e.clientX + "px";
         heart.style.top = e.clientY + "px";
-        heart.style.setProperty("--x", `${(Math.random() - 0.5) * 200}px`);
-        heart.style.setProperty("--y", `${(Math.random() - 0.5) * 200}px`);
+        heart.style.setProperty("--x", `${(Math.random() - 0.5) * 220}px`);
+        heart.style.setProperty("--y", `${(Math.random() - 0.5) * 220}px`);
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 1400);
       }
     });
 
-    /* 💗 Floating hearts */
+    /* ❤️ + 🌹 Falling romance */
+    const fall = document.getElementById("fall");
+    const symbols = ["❤️", "💗", "🌹"];
+
     setInterval(() => {
-      const h = document.createElement("div");
-      h.className = "floating-heart";
-      h.innerHTML = "💗";
-      h.style.left = Math.random() * 100 + "vw";
-      h.style.animationDuration = 8 + Math.random() * 6 + "s";
-      document.body.appendChild(h);
-      setTimeout(() => h.remove(), 12000);
-    }, 900);
+      const s = document.createElement("span");
+      s.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+      s.style.left = Math.random() * 100 + "vw";
+      s.style.fontSize = 14 + Math.random() * 18 + "px";
+      s.style.animationDuration = 10 + Math.random() * 8 + "s";
+      fall.appendChild(s);
+      setTimeout(() => s.remove(), 18000);
+    }, 350);
   </script>
 </body>
 </html>
