@@ -9,10 +9,33 @@
       height: 100%;
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #111;
+      background: radial-gradient(circle at top, #2a001a, #000);
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
+    }
+
+    /* Floating hearts layer */
+    .hearts::before,
+    .hearts::after {
+      content: "💗 💕 💖 💘 💝";
+      position: fixed;
+      width: 100%;
+      text-align: center;
+      font-size: 22px;
+      opacity: 0.15;
+      animation: float 14s linear infinite;
+      pointer-events: none;
+    }
+
+    .hearts::after {
+      animation-delay: 7s;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh); }
+      100% { transform: translateY(-120vh); }
     }
 
     .card {
@@ -22,14 +45,15 @@
       border-radius: 22px;
       text-align: center;
       max-width: 380px;
-      box-shadow: 0 0 40px rgba(255, 105, 180, 0.85);
-      animation: pulse 3s infinite;
+      box-shadow: 0 0 30px rgba(255,105,180,0.7);
+      animation: pulse 3.5s ease-in-out infinite;
+      z-index: 2;
     }
 
     @keyframes pulse {
-      0% { box-shadow: 0 0 40px rgba(255,105,180,0.7); }
-      50% { box-shadow: 0 0 55px rgba(255,105,180,1); }
-      100% { box-shadow: 0 0 40px rgba(255,105,180,0.7); }
+      0% { box-shadow: 0 0 28px rgba(255,105,180,0.6); }
+      50% { box-shadow: 0 0 55px rgba(255,105,180,0.95); }
+      100% { box-shadow: 0 0 28px rgba(255,105,180,0.6); }
     }
 
     h1 {
@@ -59,15 +83,20 @@
       text-decoration: none;
       border-radius: 22px;
       font-size: 16px;
+      transition: all 0.3s ease;
     }
 
     a:hover {
       background: #ff2f92;
+      transform: scale(1.05);
+      box-shadow: 0 0 22px rgba(255,105,180,0.9);
     }
   </style>
 </head>
 
 <body>
+  <div class="hearts"></div>
+
   <div class="card">
     <h1>Are you sure?</h1>
 
