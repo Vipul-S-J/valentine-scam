@@ -13,30 +13,23 @@
       overflow: hidden;
     }
 
-    /* 🌑 Dark romance background */
     body {
       background:
         radial-gradient(circle at top, rgba(255,60,140,0.18), transparent 60%),
         linear-gradient(180deg, #0a0005, #000);
     }
 
-    /* 🌫️ Fog */
     .fog {
       position: fixed;
       inset: -20%;
-      background:
-        radial-gradient(circle, rgba(255,105,180,0.08), transparent 60%);
+      background: radial-gradient(circle, rgba(255,105,180,0.08), transparent 60%);
       animation: fogMove 40s linear infinite;
       z-index: 1;
       pointer-events: none;
     }
 
-    @keyframes fogMove {
-      from { transform: translateX(-10%); }
-      to { transform: translateX(10%); }
-    }
+    @keyframes fogMove { from { transform: translateX(-10%); } to { transform: translateX(10%); } }
 
-    /* ❤️ Falling hearts + 🌹 petals */
     .romance-fall span {
       position: fixed;
       top: -10vh;
@@ -48,17 +41,10 @@
     }
 
     @keyframes fall {
-      from {
-        transform: translateY(-10vh) rotate(0deg) scale(0.8);
-        opacity: 0.5;
-      }
-      to {
-        transform: translateY(120vh) rotate(360deg) scale(1.2);
-        opacity: 0;
-      }
+      from { transform: translateY(-10vh) rotate(0deg) scale(0.8); opacity:0.5; }
+      to { transform: translateY(120vh) rotate(360deg) scale(1.2); opacity:0; }
     }
 
-    /* 🌙 Vignette */
     .vignette {
       position: fixed;
       inset: 0;
@@ -89,89 +75,29 @@
     }
 
     @keyframes heartbeat {
-      0% { transform: scale(1); }
+      0%,100% { transform: scale(1); }
       25% { transform: scale(1.04); }
       40% { transform: scale(1); }
       60% { transform: scale(1.05); }
-      100% { transform: scale(1); }
     }
 
-    h1 {
-      color: #ff5fa2;
-      font-size: clamp(24px, 6vw, 32px);
-      margin-bottom: 10px;
-    }
+    h1 { color:#ff5fa2; font-size: clamp(24px, 6vw, 32px); margin-bottom:10px; }
+    #typeText { color:#ffd1e8; min-height:52px; font-size:clamp(15px,4.2vw,17px); line-height:1.6; }
+    #hiddenLove { opacity:0; margin-top:14px; color:#ffc1dc; animation: fadeIn 3s ease forwards; animation-delay:4.5s; }
+    @keyframes fadeIn { to { opacity:1; } }
 
-    #typeText {
-      color: #ffd1e8;
-      min-height: 52px;
-      font-size: clamp(15px, 4.2vw, 17px);
-      line-height: 1.6;
-    }
+    .name { margin-top:16px; font-size:clamp(18px,4.8vw,22px); color:#fff; text-shadow:0 0 15px #ff5fa2,0 0 35px #ff8fc7; opacity:0; transform:scale(0.9); animation: nameReveal 3s ease forwards; animation-delay:6.5s; }
+    @keyframes nameReveal { to { opacity:1; transform:scale(1); } }
 
-    #hiddenLove {
-      opacity: 0;
-      margin-top: 14px;
-      color: #ffc1dc;
-      animation: fadeIn 3s ease forwards;
-      animation-delay: 4.5s;
-    }
+    img { width:100%; max-width:260px; margin-top:18px; border-radius:18px; box-shadow:0 0 35px rgba(255,105,180,0.9); }
 
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
+    .heart { position: fixed; font-size:22px; animation: burst 1.4s ease-out forwards; pointer-events:none; z-index:6; }
+    @keyframes burst { 0%{ transform:scale(0); opacity:1; } 100%{ transform:translate(var(--x), var(--y)) scale(1.6); opacity:0; } }
 
-    .name {
-      margin-top: 16px;
-      font-size: clamp(18px, 4.8vw, 22px);
-      color: #fff;
-      text-shadow: 0 0 15px #ff5fa2, 0 0 35px #ff8fc7;
-      opacity: 0;
-      transform: scale(0.9);
-      animation: nameReveal 3s ease forwards;
-      animation-delay: 6.5s;
-    }
-
-    @keyframes nameReveal {
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    img {
-      width: 100%;
-      max-width: 260px;
-      margin-top: 18px;
-      border-radius: 18px;
-      box-shadow: 0 0 35px rgba(255,105,180,0.9);
-    }
-
-    /* 💥 Click hearts */
-    .heart {
-      position: fixed;
-      font-size: 22px;
-      animation: burst 1.4s ease-out forwards;
-      pointer-events: none;
-      z-index: 6;
-    }
-
-    @keyframes burst {
-      0% { transform: scale(0); opacity: 1; }
-      100% {
-        transform: translate(var(--x), var(--y)) scale(1.6);
-        opacity: 0;
-      }
-    }
   </style>
 </head>
 
 <body>
-
-  <!-- 🔊 Background music (starts on first tap) -->
-  <audio id="bgMusic" loop playsinline>
-    <source src="love.mp3" type="audio/mpeg">
-  </audio>
 
   <div class="fog"></div>
   <div class="romance-fall" id="fall"></div>
@@ -180,15 +106,9 @@
   <div class="content">
     <div class="card">
       <h1>YAYYYY!!! 🎉💖</h1>
-
       <div id="typeText"></div>
-
-      <div id="hiddenLove">
-        You didn’t just click “yes”… you chose a lifetime of us 💞
-      </div>
-
+      <div id="hiddenLove">You didn’t just click “yes”… you chose a lifetime of us 💞</div>
       <div class="name">Love you, Swathi 💖</div>
-
       <img src="cute.gif" alt="Cute Valentine Cat">
     </div>
   </div>
@@ -198,56 +118,50 @@
     const text = "You chose love… and I promise to choose you every single day 💖";
     let i = 0;
     const target = document.getElementById("typeText");
-
-    function typeWriter() {
-      if (i < text.length) {
-        target.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 45);
-      }
-    }
+    function typeWriter() { if(i<text.length){ target.innerHTML += text.charAt(i); i++; setTimeout(typeWriter,45); } }
     typeWriter();
 
     /* 💥 Click hearts */
-    document.addEventListener("click", (e) => {
-      for (let i = 0; i < 6; i++) {
-        const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = "💖";
-        heart.style.left = e.clientX + "px";
-        heart.style.top = e.clientY + "px";
-        heart.style.setProperty("--x", `${(Math.random() - 0.5) * 220}px`);
-        heart.style.setProperty("--y", `${(Math.random() - 0.5) * 220}px`);
+    document.addEventListener("click",(e)=>{
+      for(let i=0;i<6;i++){
+        const heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerHTML="💖";
+        heart.style.left=e.clientX+"px";
+        heart.style.top=e.clientY+"px";
+        heart.style.setProperty("--x",`${(Math.random()-0.5)*220}px`);
+        heart.style.setProperty("--y",`${(Math.random()-0.5)*220}px`);
         document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 1400);
+        setTimeout(()=>heart.remove(),1400);
       }
     });
 
-    /* ❤️ + 🌹 Falling romance */
-    const fall = document.getElementById("fall");
-    const symbols = ["❤️","💗","🌹"];
-
-    setInterval(() => {
-      const s = document.createElement("span");
-      s.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-      s.style.left = Math.random() * 100 + "vw";
-      s.style.fontSize = 14 + Math.random() * 18 + "px";
-      s.style.animationDuration = 10 + Math.random() * 8 + "s";
+    /* ❤️ Falling hearts */
+    const fall=document.getElementById("fall");
+    const symbols=["❤️","💗","🌹"];
+    setInterval(()=>{
+      const s=document.createElement("span");
+      s.innerHTML=symbols[Math.floor(Math.random()*symbols.length)];
+      s.style.left=Math.random()*100+"vw";
+      s.style.fontSize=14+Math.random()*18+"px";
+      s.style.animationDuration=10+Math.random()*8+"s";
       fall.appendChild(s);
-      setTimeout(() => s.remove(), 18000);
-    }, 350);
+      setTimeout(()=>s.remove(),18000);
+    },350);
 
-    /* 🔊 Start music on first tap/click (required for mobile Chrome/iOS) */
-    const bgMusic = document.getElementById('bgMusic');
-    function startMusic() {
+    /* 🔊 Mobile-friendly music (must start on first user interaction) */
+    let bgMusic;
+    function initMusic(){
+      if(bgMusic) return;
+      bgMusic = new Audio("love.mp3"); // create audio dynamically
+      bgMusic.loop = true;
       bgMusic.volume = 0.18;
-      bgMusic.play().catch(() => {});
-      document.removeEventListener('click', startMusic);
-      document.removeEventListener('touchstart', startMusic);
+      bgMusic.play().catch(()=>{});
+      document.removeEventListener("click", initMusic);
+      document.removeEventListener("touchstart", initMusic);
     }
-    document.addEventListener('click', startMusic);
-    document.addEventListener('touchstart', startMusic);
-
+    document.addEventListener("click", initMusic);
+    document.addEventListener("touchstart", initMusic);
   </script>
 </body>
 </html>
