@@ -12,7 +12,6 @@
       overflow: hidden;
     }
 
-    /* 💗 Heart GIF background */
     body {
       background-image: url("heart.gif");
       background-size: cover;
@@ -20,7 +19,7 @@
       background-repeat: repeat;
     }
 
-    /* ✨ Sparkles overlay */
+    /* ✨ Sparkles */
     .sparkles {
       position: absolute;
       inset: 0;
@@ -38,10 +37,9 @@
       to { background-position: 600px -600px; }
     }
 
-    /* Center content */
     .content {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       height: 100%;
       display: flex;
       justify-content: center;
@@ -49,46 +47,144 @@
       text-align: center;
     }
 
-    /* ⬛ Black card */
     .card {
       background: rgba(0, 0, 0, 0.9);
-      padding: 32px;
-      border-radius: 24px;
-      box-shadow: 0 0 45px rgba(255, 105, 180, 0.9);
-      max-width: 380px;
+      padding: 36px;
+      border-radius: 26px;
+      box-shadow: 0 0 60px rgba(255, 105, 180, 1);
+      max-width: 420px;
+      animation: heartbeat 2.8s infinite;
+    }
+
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.03); }
+      40% { transform: scale(1); }
+      60% { transform: scale(1.04); }
+      100% { transform: scale(1); }
     }
 
     h1 {
       color: #ff5fa2;
       margin-bottom: 10px;
-      font-size: 28px;
+      font-size: 30px;
     }
 
-    h2 {
+    #typeText {
       color: #ffd1e8;
-      margin-bottom: 22px;
+      min-height: 48px;
+      margin-bottom: 14px;
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    /* 💖 Hidden love line */
+    #hiddenLove {
+      opacity: 0;
+      margin-top: 10px;
+      color: #ffc1dc;
+      font-size: 16px;
+      animation: fadeIn 3s ease forwards;
+      animation-delay: 4.5s;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* 🌟 Name glow */
+    .name {
+      margin-top: 12px;
+      font-size: 20px;
+      color: #fff;
+      text-shadow: 0 0 12px #ff5fa2, 0 0 25px #ff8fc7;
+      opacity: 0;
+      animation: fadeIn 3s ease forwards;
+      animation-delay: 6.5s;
     }
 
     img {
       width: 260px;
+      margin-top: 18px;
       border-radius: 18px;
+      box-shadow: 0 0 25px rgba(255,105,180,0.8);
+    }
+
+    /* 💥 Heart fireworks */
+    .heart {
+      position: fixed;
+      font-size: 22px;
+      animation: burst 1.4s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes burst {
+      0% { transform: scale(0); opacity: 1; }
+      100% {
+        transform: translate(var(--x), var(--y)) scale(1.5);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 
 <body>
-  <!-- Sparkles -->
+  <!-- 🎵 Soft background music -->
+  <audio autoplay loop volume="0.25">
+    <source src="love.mp3" type="audio/mpeg">
+  </audio>
+
   <div class="sparkles"></div>
 
-  <!-- Content -->
   <div class="content">
     <div class="card">
       <h1>YAYYYY!!! 🎉💖</h1>
-      <h2>Love youuu Swathi 💖🥰</h2>
 
-      <!-- 🐱 New gif -->
+      <div id="typeText"></div>
+
+      <div id="hiddenLove">
+        You didn’t just click “yes”… you chose a lifetime of us 💞
+      </div>
+
+      <!-- 🌟 Optional name reveal -->
+      <div class="name">Love you, Swathi 💖</div>
+
       <img src="cute.gif" alt="Cute Valentine Cat">
     </div>
   </div>
+
+  <script>
+    /* ✨ Typewriter */
+    const text =
+      "You chose love… and I promise to choose you every single day 💖";
+    let i = 0;
+    const speed = 45;
+    const target = document.getElementById("typeText");
+
+    function typeWriter() {
+      if (i < text.length) {
+        target.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+    typeWriter();
+
+    /* 💥 Heart fireworks */
+    document.addEventListener("click", (e) => {
+      for (let i = 0; i < 6; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💖";
+        heart.style.left = e.clientX + "px";
+        heart.style.top = e.clientY + "px";
+        heart.style.setProperty("--x", `${(Math.random() - 0.5) * 200}px`);
+        heart.style.setProperty("--y", `${(Math.random() - 0.5) * 200}px`);
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 1400);
+      }
+    });
+  </script>
 </body>
 </html>
