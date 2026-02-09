@@ -16,30 +16,43 @@
       overflow: hidden;
     }
 
-    /* Floating hearts layer */
-    .hearts::before,
-    .hearts::after {
-      content: "💗 💕 💖 💘 💝";
+    /* ✨ Sparkles */
+    .sparkles {
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(#fff 1px, transparent 1px),
+        radial-gradient(#ff9acb 1px, transparent 1px);
+      background-size: 120px 120px, 180px 180px;
+      animation: sparkle 20s linear infinite;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+
+    @keyframes sparkle {
+      from { background-position: 0 0, 0 0; }
+      to { background-position: 500px 1000px, -500px 800px; }
+    }
+
+    /* 🌹 Falling petals */
+    .petals::before {
+      content: "🌹 🌸 🌹 🌸 🌹";
       position: fixed;
       width: 100%;
       text-align: center;
       font-size: 22px;
-      opacity: 0.15;
-      animation: float 14s linear infinite;
+      opacity: 0.2;
+      animation: fall 14s linear infinite;
       pointer-events: none;
     }
 
-    .hearts::after {
-      animation-delay: 7s;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(100vh); }
-      100% { transform: translateY(-120vh); }
+    @keyframes fall {
+      0% { transform: translateY(-10vh); }
+      100% { transform: translateY(120vh); }
     }
 
     .card {
-      background: #000;
+      background: rgba(0,0,0,0.85);
       color: #fff;
       padding: 32px;
       border-radius: 22px;
@@ -52,7 +65,7 @@
 
     @keyframes pulse {
       0% { box-shadow: 0 0 28px rgba(255,105,180,0.6); }
-      50% { box-shadow: 0 0 55px rgba(255,105,180,0.95); }
+      50% { box-shadow: 0 0 60px rgba(255,105,180,1); }
       100% { box-shadow: 0 0 28px rgba(255,105,180,0.6); }
     }
 
@@ -91,11 +104,20 @@
       transform: scale(1.05);
       box-shadow: 0 0 22px rgba(255,105,180,0.9);
     }
+
+    /* 🎵 Music button */
+    .music {
+      margin-top: 18px;
+      font-size: 13px;
+      opacity: 0.7;
+      cursor: pointer;
+    }
   </style>
 </head>
 
 <body>
-  <div class="hearts"></div>
+  <div class="sparkles"></div>
+  <div class="petals"></div>
 
   <div class="card">
     <h1>Are you sure?</h1>
@@ -109,8 +131,20 @@
       Some decisions are quiet… but they echo for a lifetime ✨
     </p>
 
-    <!-- Goes to final celebration page -->
     <a href="thanks.html">Yes, I choose this love 💖</a>
+
+    <div class="music" onclick="playMusic()">🎵 tap for music</div>
   </div>
+
+  <!-- 🎶 Soft background music -->
+  <audio id="bgm" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_9c3c5a3c8b.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function playMusic() {
+      document.getElementById("bgm").play();
+    }
+  </script>
 </body>
 </html>
