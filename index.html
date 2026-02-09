@@ -22,33 +22,34 @@
       align-items: center;
     }
 
-    /* Dark overlay for readability */
+    /* Dark overlay */
     .overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.55);
+      background: rgba(0, 0, 0, 0.45);
     }
 
+    /* 💗 Pink card */
     .card {
       position: relative;
-      background: rgba(30, 30, 30, 0.95);
-      border-radius: 16px;
+      background: linear-gradient(135deg, #ff5fa2, #ff8fc7);
+      border-radius: 18px;
       padding: 30px;
       text-align: center;
       width: 360px;
-      box-shadow: 0 0 30px rgba(255, 0, 120, 0.6);
+      box-shadow: 0 0 40px rgba(255, 80, 160, 0.9);
       color: #fff;
       z-index: 2;
     }
 
     .warning {
-      color: #ff4d6d;
       font-weight: bold;
       margin-bottom: 8px;
+      color: #fff;
     }
 
     p {
-      color: #ffd1e8;
+      color: #ffe6f2;
     }
 
     h1 {
@@ -68,16 +69,17 @@
       border-radius: 25px;
       border: none;
       cursor: pointer;
+      font-weight: bold;
     }
 
     #yes {
-      background: #ff4da6;
-      color: white;
+      background: #fff;
+      color: #ff4da6;
     }
 
     #no {
-      background: #666;
-      color: white;
+      background: #ff2f92;
+      color: #fff;
       position: absolute;
       left: 180px;
     }
