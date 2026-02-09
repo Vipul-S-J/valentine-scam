@@ -13,7 +13,7 @@
       overflow: hidden;
     }
 
-    /* 🌑 Dark romantic background */
+    /* 🌑 Dark romance background */
     body {
       background:
         radial-gradient(circle at top, rgba(255,60,140,0.18), transparent 60%),
@@ -36,24 +36,24 @@
       to { transform: translateX(10%); }
     }
 
-    /* ❣️ Heart snow */
-    .heart-snow span {
+    /* ❤️ Falling hearts + 🌹 petals */
+    .romance-fall span {
       position: fixed;
-      top: -5vh;
-      font-size: 12px;
-      opacity: 0.3;
-      animation: snowFall linear infinite;
+      top: -10vh;
+      font-size: 18px;
+      opacity: 0.4;
+      animation: fall linear infinite;
       pointer-events: none;
       z-index: 2;
     }
 
-    @keyframes snowFall {
+    @keyframes fall {
       from {
-        transform: translateY(-5vh) rotate(0deg) scale(0.5);
-        opacity: 0.3;
+        transform: translateY(-10vh) rotate(0deg) scale(0.8);
+        opacity: 0.5;
       }
       to {
-        transform: translateY(120vh) rotate(360deg) scale(1);
+        transform: translateY(120vh) rotate(360deg) scale(1.2);
         opacity: 0;
       }
     }
@@ -117,7 +117,9 @@
       animation-delay: 4.5s;
     }
 
-    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
 
     .name {
       margin-top: 16px;
@@ -131,7 +133,10 @@
     }
 
     @keyframes nameReveal {
-      to { opacity: 1; transform: scale(1); }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     img {
@@ -153,20 +158,23 @@
 
     @keyframes burst {
       0% { transform: scale(0); opacity: 1; }
-      100% { transform: translate(var(--x), var(--y)) scale(1.6); opacity: 0; }
+      100% {
+        transform: translate(var(--x), var(--y)) scale(1.6);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- 🔊 Background music -->
-  <audio id="bgMusic" autoplay loop muted playsinline>
+  <!-- 🔊 Background music (starts on first tap) -->
+  <audio id="bgMusic" loop playsinline>
     <source src="love.mp3" type="audio/mpeg">
   </audio>
 
   <div class="fog"></div>
-  <div class="heart-snow" id="heartSnow"></div>
+  <div class="romance-fall" id="fall"></div>
   <div class="vignette"></div>
 
   <div class="content">
@@ -215,27 +223,31 @@
       }
     });
 
-    /* ❣️ Heart snow effect */
-    const heartSnow = document.getElementById("heartSnow");
-    const hearts = ["❤️", "💗", "💖"];
-    setInterval(() => {
-      const h = document.createElement("span");
-      h.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
-      h.style.left = Math.random() * 100 + "vw";
-      h.style.fontSize = 10 + Math.random() * 16 + "px";
-      h.style.animationDuration = 8 + Math.random() * 6 + "s";
-      heartSnow.appendChild(h);
-      setTimeout(() => h.remove(), 14000);
-    }, 150);
+    /* ❤️ + 🌹 Falling romance */
+    const fall = document.getElementById("fall");
+    const symbols = ["❤️","💗","🌹"];
 
-    /* 🔊 Unmute background music on first interaction */
+    setInterval(() => {
+      const s = document.createElement("span");
+      s.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+      s.style.left = Math.random() * 100 + "vw";
+      s.style.fontSize = 14 + Math.random() * 18 + "px";
+      s.style.animationDuration = 10 + Math.random() * 8 + "s";
+      fall.appendChild(s);
+      setTimeout(() => s.remove(), 18000);
+    }, 350);
+
+    /* 🔊 Start music on first tap/click (required for mobile Chrome/iOS) */
     const bgMusic = document.getElementById('bgMusic');
-    document.addEventListener('click', () => {
-      if (bgMusic.muted) {
-        bgMusic.muted = false;
-        bgMusic.volume = 0.18;
-      }
-    }, { once: true });
+    function startMusic() {
+      bgMusic.volume = 0.18;
+      bgMusic.play().catch(() => {});
+      document.removeEventListener('click', startMusic);
+      document.removeEventListener('touchstart', startMusic);
+    }
+    document.addEventListener('click', startMusic);
+    document.addEventListener('touchstart', startMusic);
+
   </script>
 </body>
 </html>
