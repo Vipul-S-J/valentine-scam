@@ -16,37 +16,47 @@
       overflow: hidden;
     }
 
-    /* ✨ Sparkles */
-    .sparkles {
+    /* 💖 Heart snow container */
+    .heart-snow {
       position: fixed;
       inset: 0;
-      background-image:
-        radial-gradient(#fff 1px, transparent 1px),
-        radial-gradient(#ff9acb 1px, transparent 1px);
-      background-size: 120px 120px, 180px 180px;
-      animation: sparkle 20s linear infinite;
-      opacity: 0.15;
       pointer-events: none;
+      z-index: 1;
     }
 
-    @keyframes sparkle {
-      from { background-position: 0 0, 0 0; }
-      to { background-position: 500px 1000px, -500px 800px; }
+    .heart {
+      position: absolute;
+      top: -10vh;
+      font-size: 18px;
+      opacity: 0.6;
+      animation: fall linear infinite;
     }
 
-    /* 🌹 Falling petals */
+    @keyframes fall {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(120vh) translateX(40px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* 🌹 Light falling petals (kept subtle) */
     .petals::before {
       content: "🌹 🌸 🌹 🌸 🌹";
       position: fixed;
       width: 100%;
       text-align: center;
       font-size: 22px;
-      opacity: 0.2;
-      animation: fall 14s linear infinite;
+      opacity: 0.15;
+      animation: fallPetals 16s linear infinite;
       pointer-events: none;
+      z-index: 1;
     }
 
-    @keyframes fall {
+    @keyframes fallPetals {
       0% { transform: translateY(-10vh); }
       100% { transform: translateY(120vh); }
     }
@@ -94,7 +104,6 @@
       margin-bottom: 26px;
     }
 
-    /* 💖 Button (hidden initially) */
     a {
       display: inline-block;
       padding: 10px 26px;
@@ -126,7 +135,9 @@
 </head>
 
 <body>
-  <div class="sparkles"></div>
+  <!-- 💖 Heart Snow -->
+  <div class="heart-snow" id="heartSnow"></div>
+
   <div class="petals"></div>
 
   <div class="card">
@@ -143,5 +154,25 @@
 
     <a href="thanks.html">Yes, I choose this love 💖</a>
   </div>
+
+  <script>
+    /* 💖 Generate falling heart snow */
+    const snow = document.getElementById("heartSnow");
+    const hearts = ["💖", "🤍"];
+
+    function createHeart() {
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+      h.style.left = Math.random() * 100 + "vw";
+      h.style.fontSize = 14 + Math.random() * 10 + "px";
+      h.style.animationDuration = 8 + Math.random() * 6 + "s";
+      snow.appendChild(h);
+
+      setTimeout(() => h.remove(), 15000);
+    }
+
+    setInterval(createHeart, 350);
+  </script>
 </body>
 </html>
