@@ -9,9 +9,9 @@
       height: 100%;
       margin: 0;
       font-family: Arial, sans-serif;
+      overflow: hidden;
     }
 
-    /* Fullscreen background image */
     body {
       background-image: url("tim-mossholder-UrrIRRX4ff8-unsplash.jpg");
       background-size: cover;
@@ -20,16 +20,37 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      transition: opacity 1.2s ease;
     }
 
-    /* Dark overlay */
+    body.fade-out {
+      opacity: 0;
+    }
+
     .overlay {
       position: absolute;
       inset: 0;
       background: rgba(0, 0, 0, 0.45);
+      z-index: 0;
     }
 
-    /* 💗 Pink card */
+    .hearts {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,182,193,0.8) 2px, transparent 3px),
+        radial-gradient(circle, rgba(255,255,255,0.8) 2px, transparent 3px);
+      background-size: 70px 70px;
+      animation: floatHearts 25s linear infinite;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    @keyframes floatHearts {
+      from { background-position: 0 0; }
+      to { background-position: 400px -800px; }
+    }
+
     .card {
       position: relative;
       background: linear-gradient(135deg, #ff5fa2, #ff8fc7);
@@ -40,12 +61,18 @@
       box-shadow: 0 0 40px rgba(255, 80, 160, 0.9);
       color: #fff;
       z-index: 2;
+      animation: heartbeat 2.6s infinite;
+    }
+
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.025); }
+      100% { transform: scale(1); }
     }
 
     .warning {
       font-weight: bold;
       margin-bottom: 8px;
-      color: #fff;
     }
 
     p {
@@ -83,30 +110,42 @@
       position: absolute;
       left: 180px;
     }
+
+    .micro {
+      margin-top: 14px;
+      font-size: 13px;
+      opacity: 0.85;
+    }
   </style>
 </head>
 
 <body>
   <div class="overlay"></div>
+  <div class="hearts"></div>
 
   <div class="card">
     <div class="warning">⚠️ Scam Link Detected</div>
     <p>This link may steal your heart 💔</p>
 
     <h1>Will you be my Valentine ❤️?</h1>
-    <p style="font-style: italic; margin-top: -10px;">
-  Just one click… and maybe the start of something beautiful ✨
-</p>
 
+    <p style="font-style: italic; margin-top: -10px;">
+      Just one click… and maybe the start of something beautiful ✨
+    </p>
 
     <div class="buttons">
-      <button id="yes">Yes 💖</button>
+      <button id="yes">Yes, take my heart 💕</button>
       <button id="no">No 🙃</button>
     </div>
+
+    <p class="micro">
+      Some clicks change nothing. Some change everything 💞
+    </p>
   </div>
 
   <script>
     const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
 
     noBtn.addEventListener("mouseover", () => {
       const x = Math.random() * 200;
@@ -115,8 +154,11 @@
       noBtn.style.top = y + "px";
     });
 
-    document.getElementById("yes").onclick = () => {
-      window.location.href = "love.html";
+    yesBtn.onclick = () => {
+      document.body.classList.add("fade-out");
+      setTimeout(() => {
+        window.location.href = "love.html";
+      }, 1200);
     };
   </script>
 </body>
